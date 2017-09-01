@@ -44,6 +44,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- dynamically fill train info here -->
                                 </tbody>
                             </table>
                         </div>
@@ -51,5 +52,43 @@
                 </div>
             </div>
         </div>
+        <br>
+        <!-- add train -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header text-white bg-info mb-3">
+                            Add Train
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="train-input-0">Train Name</label>
+                                    <input type="text" class="form-control" id="train-input-0" placeholder="Name of train">
+                                </div>
+                                <div class="form-group">
+                                    <label for="train-input-1">Destination</label>
+                                    <input type="text" class="form-control" id="train-input-1" placeholder="Destination of train">
+                                </div>
+                                <div class="form-group">
+                                    <label for="train-input-2">First Train Time HH:mm Military Time</label>
+                                    <input type="text" class="form-control" id="train-input-2" placeholder="First train time">
+                                </div>
+                                <div class="form-group">
+                                    <label for="train-input-3">Frequency (min)</label>
+                                    <input type="text" class="form-control" id="train-input-3" placeholder="Frequency of train">
+                                </div>
+                                <button class='btn btn-xl btn-primary' type="button" name="submit">Add Train</button>
+                                <br>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- firebase source -->
+        <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+        
     </body>
 </html>
