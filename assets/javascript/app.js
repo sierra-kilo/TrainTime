@@ -22,3 +22,21 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // on page load load info from server using jquery
+
+$('.submit').on('click', function(event) {
+    event.preventDefault();
+
+    train = $('#train-input-0').val().trim();
+    destination = $('#train-input-1').val().trim();
+    first = $('#train-input-2').val().trim();
+    frequency = $('#train-input-3').val().trim();
+    //testing
+    console.log(train, destination, first, frequency);
+
+    database.ref().push({
+        train: train ,
+        destination: destination,
+        first: first,
+        frequency: frequency
+    });
+});
