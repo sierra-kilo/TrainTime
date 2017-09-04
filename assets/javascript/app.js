@@ -5,6 +5,9 @@ var frequency = null;
 
 var trainUpload = null;
 
+$( document ).ready(function() {
+    console.log(moment().format());
+});
 
 // Initialize Firebase
     var config = {
@@ -42,17 +45,29 @@ $('.submit').on('click', function(event) {
 });
 
 database.ref().on("child_added", function(childSnapshot) {
-      // Log everything that's coming out of snapshot
-  console.log(childSnapshot.val().train);
-  console.log(childSnapshot.val().destination);
-  console.log(childSnapshot.val().first);
-  console.log(childSnapshot.val().frequency);
+    var trainName = childSnapshot.val().train;
+    var trainDestination = childSnapshot.val().destination;
+    var trainFrequency = childSnapshot.val().frequency;
+
+    var sv = childSnapshot.val();
+	var start = moment(sv.first, "HHmm");
+	var minDiff = parseInt(start.diff(moment(), "minutes"));
+	var freq = parseInt(sv.frequency);
+	var minLeft = freq + (minDiff % freq);
+    console.log(start, minDiff, freq, minLeft);
+
+	var m = moment().add(minLeft, "minutes");
+	var nextTrain = m.format("hh:mm");
+
+
   // full list of items to the well
-  $("#table-body").append("<tr>" +
-    "<td class = 'table-name'>" + childSnapshot.val().train + "</td>" +
-    "<td class = 'table-name'>" + childSnapshot.val().destination + "</td>" +
-    "<td class = 'table-name'>" + childSnapshot.val().frequency + "</td>" +
-    "</tr>");
+    $("#table-body").append("<tr>" +
+        "<td class = 'table-name'>" + trainName + "</td>" +
+        "<td class = 'table-name'>" + trainDestination + "</td>" +
+        "<td class = 'table-name'>" + trainFrequency + "</td>" +
+        "<td class = 'table-name'>" + nextTrain +
+        "<td class = 'table-name'>" + minLeft +
+        "</tr>");
   // Handle the errors
   }, function(errorObject) {
   console.log("Errors handled: " + errorObject.code);
