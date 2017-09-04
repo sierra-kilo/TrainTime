@@ -40,3 +40,20 @@ $('.submit').on('click', function(event) {
         frequency: frequency
     });
 });
+
+database.ref().on("child_added", function(childSnapshot) {
+      // Log everything that's coming out of snapshot
+  console.log(childSnapshot.val().train);
+  console.log(childSnapshot.val().destination);
+  console.log(childSnapshot.val().first);
+  console.log(childSnapshot.val().frequency);
+  // full list of items to the well
+  $("#table-body").append("<tr>" +
+    "<td class = 'table-name'>" + childSnapshot.val().train + "</td>" +
+    "<td class = 'table-name'>" + childSnapshot.val().destination + "</td>" +
+    "<td class = 'table-name'>" + childSnapshot.val().frequency + "</td>" +
+    "</tr>");
+  // Handle the errors
+  }, function(errorObject) {
+  console.log("Errors handled: " + errorObject.code);
+});
